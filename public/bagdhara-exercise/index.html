@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>বাগধারা অনুশীলন — Munjiba</title>
+<meta name="description" content="অডিও লেকচার শুনে বাগধারা দিয়ে শূন্যস্থান পূরণের অনুশীলন।">
+<meta name="theme-color" content="#f4eee1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4eee1; --card:#fbf8f0; --ink:#1d2a26; --muted:#5d6a64;
+  --green:#14342c; --green2:#1f4a3f; --gold:#e9a928; --gold-soft:#f6dfa3;
+  --ok:#1e7a4f; --ok-bg:#d9efe2; --bad:#b4372a; --bad-bg:#f8dcd6;
+  --line:#d9d0bd; --r:18px;
+  --serif:'Noto Serif Bengali','Kalpurush',Georgia,serif;
+  --sans:'Hind Siliguri','Noto Sans Bengali','Kalpurush',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.8;font-size:18px;
+  background-image:radial-gradient(rgba(20,52,44,.07) 1px,transparent 1.2px);background-size:22px 22px;
+  padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}
+a{color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+
+/* top bar */
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0;font-size:15px}
+.top a{text-decoration:none;font-weight:600;display:inline-flex;gap:8px;align-items:center}
+.top a:hover{color:var(--green2)}
+.top .tag{color:var(--muted)}
+
+/* hero */
+.hero{padding:26px 0 10px;position:relative}
+.kicker{display:inline-block;font-size:14px;font-weight:600;letter-spacing:.04em;color:var(--green2);
+  border:1.5px solid var(--green2);border-radius:99px;padding:2px 14px}
+h1{font-family:var(--serif);font-weight:800;font-size:clamp(40px,9vw,72px);line-height:1.25;margin:16px 0 6px;color:var(--green)}
+h1 span{position:relative;white-space:nowrap}
+h1 span svg{position:absolute;left:0;bottom:-10px;width:100%;height:16px;overflow:visible}
+.lead{max-width:34em;color:var(--muted);font-size:19px;margin-top:18px}
+.stamp{position:absolute;right:0;top:34px;width:112px;height:112px;border-radius:50%;border:2px dashed var(--gold);
+  display:grid;place-items:center;text-align:center;transform:rotate(9deg);font-weight:700;line-height:1.3;color:var(--green);
+  background:var(--gold-soft);font-size:15px}
+.stamp b{display:block;font-family:var(--serif);font-size:30px;line-height:1}
+@media(max-width:640px){.stamp{display:none}}
+
+/* player */
+.player{margin:34px 0 10px;background:var(--green);color:#f4eee1;border-radius:24px;padding:22px 24px;
+  display:grid;grid-template-columns:auto 1fr;gap:18px 20px;align-items:center;position:relative;overflow:hidden;
+  box-shadow:0 10px 0 -2px #0c211c}
+.player::after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;
+  border:28px solid rgba(233,169,40,.12)}
+.play{width:64px;height:64px;border-radius:50%;border:0;background:var(--gold);color:var(--green);cursor:pointer;
+  display:grid;place-items:center;transition:transform .15s;flex:none}
+.play:hover{transform:scale(1.06)} .play:active{transform:scale(.95)}
+.play svg{width:26px;height:26px;fill:currentColor}
+.ptitle{font-weight:600;font-size:18px;line-height:1.4}
+.ptitle small{display:block;font-weight:400;opacity:.7;font-size:14px}
+.bar{grid-column:1/-1;display:flex;align-items:center;gap:12px;font-size:14px;font-variant-numeric:tabular-nums;z-index:1}
+input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:6px;border-radius:9px;
+  background:linear-gradient(to right,var(--gold) var(--p,0%),rgba(244,238,225,.25) var(--p,0%));cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#f4eee1;border:3px solid var(--gold)}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#f4eee1;border:3px solid var(--gold)}
+.ctl{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;z-index:1}
+.pill{font:600 14px var(--sans);background:transparent;color:#f4eee1;border:1.5px solid rgba(244,238,225,.4);border-radius:99px;padding:3px 14px;cursor:pointer}
+.pill:hover{border-color:var(--gold)} .pill.on{background:var(--gold);color:var(--green);border-color:var(--gold)}
+
+/* instructions */
+.how{margin:34px 0 8px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.how div{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:14px 16px;font-size:16px;line-height:1.6}
+.how i{font:800 26px/1 var(--serif);color:var(--gold);font-style:normal;display:block;margin-bottom:4px}
+@media(max-width:640px){.how{grid-template-columns:1fr}}
+.note{font-size:15px;color:var(--muted);margin:10px 2px 0}
+
+.modebar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:38px 0 6px}
+.modebar h2{font-family:var(--serif);font-size:26px;color:var(--green)}
+.seg{display:inline-flex;border:1.5px solid var(--green);border-radius:99px;overflow:hidden}
+.seg button{font:600 15px var(--sans);padding:5px 18px;border:0;background:transparent;color:var(--green);cursor:pointer}
+.seg button.on{background:var(--green);color:#f4eee1}
+
+/* exercise card */
+.ex{background:var(--card);border:1.5px solid var(--ink);border-radius:var(--r);margin:22px 0;padding:26px 28px 22px;
+  box-shadow:6px 6px 0 var(--ink);position:relative;opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.ex.in{opacity:1;transform:none}
+.exhead{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.letter{width:48px;height:48px;border-radius:14px;background:var(--gold);color:var(--green);font:800 26px var(--serif);
+  display:grid;place-items:center;transform:rotate(-4deg);flex:none}
+.exhead .meta{font-size:14px;color:var(--muted)}
+.exhead .score{margin-left:auto;font-weight:700;font-size:15px;background:var(--paper);border-radius:99px;padding:2px 14px;border:1.5px solid var(--line)}
+.txt{font-size:19px;line-height:2.45}
+
+.bank{display:flex;flex-wrap:wrap;gap:9px;margin:4px 0 16px;padding:14px 14px 8px;border:1.5px dashed var(--line);border-radius:14px;background:rgba(244,238,225,.6)}
+.bank::before{content:"বাগধারা ভান্ডার";flex-basis:100%;font-size:13px;font-weight:600;letter-spacing:.05em;color:var(--muted);margin-bottom:-2px}
+.chip{font:500 16px var(--sans);padding:3px 14px;border-radius:10px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;
+  box-shadow:0 3px 0 var(--ink);transition:transform .1s,box-shadow .1s,background .15s;margin-bottom:6px}
+.chip:hover{transform:translateY(-1px)} .chip:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.chip.sel{background:var(--gold);}
+.chip.used{opacity:.35;box-shadow:none;transform:none}
+
+.blank{font:inherit;font-size:.95em;min-width:7.2em;padding:0 10px;margin:0 2px;border:0;border-bottom:2.5px dashed var(--green2);
+  background:rgba(233,169,40,.14);border-radius:8px 8px 0 0;color:var(--ink);cursor:pointer;line-height:1.7;vertical-align:baseline;
+  text-align:center}
+.blank sup{font-size:.65em;color:var(--green2);font-weight:700;margin-right:3px}
+.blank:hover{background:rgba(233,169,40,.3)}
+.blank.target{background:var(--gold-soft);border-bottom-style:solid;animation:pulse 1.1s infinite}
+.blank.filled{border-bottom-style:solid;font-weight:600;background:#fff}
+.blank.ok{background:var(--ok-bg);border-bottom-color:var(--ok);color:var(--ok);animation:pop .35s}
+.blank.bad{background:var(--bad-bg);border-bottom-color:var(--bad);color:var(--bad);animation:shake .35s}
+.blank.shown{background:var(--gold-soft);border-bottom-color:var(--gold);font-weight:700}
+@keyframes pulse{50%{box-shadow:0 0 0 4px rgba(233,169,40,.35)}}
+@keyframes pop{50%{transform:scale(1.12)}}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+.read-ans{font-weight:700;color:var(--green);background:linear-gradient(transparent 58%,var(--gold-soft) 58%);padding:0 3px}
+body:not(.read) .read-ans{display:none}
+body.read .blank,body.read .bank,body.read .actions{display:none}
+
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.btn{font:600 15px var(--sans);padding:7px 18px;border-radius:99px;border:1.5px solid var(--green);background:var(--green);color:#f4eee1;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--green)}
+.btn:hover{filter:brightness(1.15)}
+.msg{font-weight:600;font-size:15px;margin-left:auto}
+.msg.good{color:var(--ok)}
+
+/* dock */
+.dock{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20;
+  width:min(560px,calc(100% - 24px));background:var(--green);color:#f4eee1;border-radius:99px;padding:8px 10px 8px 8px;
+  display:flex;align-items:center;gap:12px;box-shadow:0 8px 24px rgba(12,33,28,.35)}
+.dock .play{width:44px;height:44px}.dock .play svg{width:18px;height:18px}
+.dock .t{font-size:13px;font-variant-numeric:tabular-nums;opacity:.85;min-width:84px}
+.dock input{min-width:60px}
+.dock .sc{font-weight:700;font-size:14px;background:var(--gold);color:var(--green);border-radius:99px;padding:3px 12px;white-space:nowrap}
+
+footer{text-align:center;color:var(--muted);font-size:14px;padding:40px 0 10px}
+footer a{font-weight:600}
+
+@media(max-width:640px){
+  body{font-size:17px}
+  .ex{padding:20px 16px 16px;box-shadow:4px 4px 0 var(--ink)}
+  .txt{font-size:18px}
+  .player{padding:18px}
+  .dock .t{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.ex{opacity:1;transform:none}html{scroll-behavior:auto}}
+@media print{
+  body{background:#fff;padding:0}.player,.dock,.top,.how,.modebar,.actions,.bank,.stamp{display:none!important}
+  .ex{box-shadow:none;break-inside:avoid;opacity:1;transform:none}.blank{border-bottom:1.5px solid #000;background:none;min-width:6em}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a href="/">← সব স্টাডি ম্যাটেরিয়ালস</a>
+    <span class="tag">Munjiba</span>
+  </div>
+
+  <header class="hero">
+    <span class="kicker">বাংলা ব্যাকরণ · অনুশীলন</span>
+    <h1><span>বাগধারা
+      <svg viewBox="0 0 300 16" preserveAspectRatio="none"><path d="M2 10 C 30 0, 50 16, 80 8 S 130 2, 160 9 S 220 15, 298 5" fill="none" stroke="#e9a928" stroke-width="5" stroke-linecap="round"/></svg>
+    </span><br>অনুশীলন</h1>
+    <p class="lead">আগে লেকচারটা শোনো, তারপর চারটি অনুচ্ছেদের শূন্যস্থানে সঠিক বাগধারা বসাও। ভুল হলেও সমস্যা নেই, যতবার ইচ্ছা আবার চেষ্টা করা যাবে।</p>
+    <div class="stamp"><div><b>২০</b>শূন্যস্থান</div></div>
+  </header>
+
+  <section class="player" aria-label="লেকচার অডিও">
+    <button class="play" id="play" aria-label="চালাও / থামাও"></button>
+    <div class="ptitle">লেকচার অডিও<small>প্রায় ৪ মিনিট ৫৭ সেকেন্ড</small></div>
+    <div class="bar"><span id="cur">০:০০</span><input type="range" id="seek" min="0" max="1000" value="0" aria-label="অডিও অগ্রগতি"><span id="dur">৪:৫৭</span></div>
+    <div class="ctl">
+      <button class="pill" id="back">⟲ ১০ সে.</button>
+      <button class="pill" id="fwd">১০ সে. ⟳</button>
+      <button class="pill sp" data-r="0.75">০.৭৫×</button>
+      <button class="pill sp on" data-r="1">১×</button>
+      <button class="pill sp" data-r="1.25">১.২৫×</button>
+    </div>
+    <audio id="aud" preload="metadata" src="bagdhara-lecture.m4a"></audio>
+  </section>
+
+  <div class="how">
+    <div><i>১</i>নিচের ভান্ডার থেকে একটি বাগধারা বেছে নাও।</div>
+    <div><i>২</i>তারপর যে শূন্যস্থানে মানায়, সেখানে ট্যাপ করো।</div>
+    <div><i>৩</i>“মিলিয়ে দেখো” চাপলেই সঠিক-ভুল বোঝা যাবে।</div>
+  </div>
+  <p class="note">প্রতিটি বাগধারা একবার ব্যবহার করতে হবে। খাতায় লেখার সময় বাক্য অনুযায়ী ক্রিয়ার রূপ বদলে নিতে ভুলো না।</p>
+
+  <div class="modebar">
+    <h2>অনুচ্ছেদসমূহ</h2>
+    <div class="seg" role="group" aria-label="মোড">
+      <button id="mPractice" class="on">অনুশীলন</button>
+      <button id="mRead">উত্তরসহ পড়ো</button>
+    </div>
+  </div>
+
+  <main id="exs"></main>
+
+  <footer>© Munjiba · <a href="/">সব ম্যাটেরিয়ালস</a> · <a href="#" onclick="window.print();return false">প্রিন্ট করো</a></footer>
+</div>
+
+<div class="dock" id="dock">
+  <button class="play" id="play2" aria-label="চালাও / থামাও"></button>
+  <span class="t" id="t2">০:০০ / ৪:৫৭</span>
+  <input type="range" id="seek2" min="0" max="1000" value="0" aria-label="অডিও অগ্রগতি">
+  <span class="sc" id="total" aria-live="polite">০/২০</span>
+</div>
+
+<script>
+const DATA = [{"label": "ক", "text": "আমাদের বিদ্যালয়ের শিক্ষার্থীরা একদিন শিক্ষা সফরে গেল। পথে হঠাৎ প্রচণ্ড বৃষ্টি শুরু হওয়ায় সবাই {1} পড়ল। শিক্ষকেরা কী করবেন বুঝতে না পেরে যেন {2} পড়লেন। একজন শিক্ষার্থী কোনো প্রমাণ ছাড়াই অনুমান করে বলতে লাগল, কোথায় বৃষ্টি বেশি হচ্ছে। সে যেন {3}। এদিকে ঝোপের আড়ালে একটি শিয়াল খাবারের আশায় {4} ছিল। পরে দুষ্টুমি করায় একজন শিক্ষার্থীকে দল থেকে {5} দিয়ে বের করে দেওয়া হলো।", "forms": ["অথৈ পানিতে", "অকুল পাথারে", "অন্ধকারে ঢিল ছুঁড়লো", "ওঁত পেতে", "অর্ধচন্দ্র"], "bank": ["অর্ধচন্দ্র", "অন্ধকারে ঢিল ছোঁড়া", "অথৈ পানিতে পড়া", "ওঁত পেতে থাকা", "অকুল পাথার"], "ans": ["অথৈ পানিতে পড়া", "অকুল পাথার", "অন্ধকারে ঢিল ছোঁড়া", "ওঁত পেতে থাকা", "অর্ধচন্দ্র"]}, {"label": "খ", "text": "আমাদের বিদ্যালয়ে বার্ষিক সাংস্কৃতিক অনুষ্ঠানের আয়োজন করা হলো। অনুষ্ঠান উপলক্ষে বিদ্যালয়ে {1} হয়েছিল। অনুষ্ঠানে অংশ নেওয়ার সুযোগ পেয়ে মিতু {2}। কিন্তু মঞ্চে উঠে বক্তব্য দিতে গিয়ে রাফি {3} শুরু করল। তার বন্ধু কোনো প্রস্তুতি ছাড়াই মঞ্চে উঠে {4} বলতে লাগল। অনুষ্ঠানে প্রধান অতিথি হিসেবে আসার কথা ছিল একজন বিখ্যাত লেখকের। তিনি অনেক দিন পর বিদ্যালয়ে এলেন। তাঁকে দেখে মনে হলো যেন {5} দেখা পেলাম।", "forms": ["এলাহি কাণ্ড", "আহ্লাদে আটখানা", "আমতা আমতা করা", "আবোল তাবোল", "অমাবস্যার চাঁদের"], "bank": ["আবোল তাবোল", "এলাহি কাণ্ড", "আহ্লাদে আটখানা", "অমাবস্যার চাঁদ", "আমতা আমতা করা"], "ans": ["এলাহি কাণ্ড", "আহ্লাদে আটখানা", "আমতা আমতা করা", "আবোল তাবোল", "অমাবস্যার চাঁদ"]}, {"label": "গ", "text": "বার্ষিক ক্রীড়া প্রতিযোগিতার প্রস্তুতির সময় রাকিব প্রতিদিন অনেক কাজ করত। সে {1} এর মতো কাজ করছিল। অন্যদিকে, দলের অধিনায়ক সব কাজের হিসাব {2} বুঝে নিতেন। একদিন অসাবধানতার কারণে রাকিবের হাতে বিদ্যালয়ের একটি মূল্যবান বল নষ্ট হয়ে গেল। এতে সে ভালো একটি শিক্ষা পেল। এটিই ছিল তার {3}। দলের সবচেয়ে ছোট সদস্যটি বয়সের তুলনায় অনেক বেশি জ্ঞানীর মতো কথা বলত। সবাই তাকে {4} বলত। আরেকজন শিক্ষার্থী কোনো কাজ করতে চাইত না। সবাই তাকে {5} বলে ডাকত।", "forms": ["কলুর বলদ", "কড়ায় গণ্ডায়", "আক্কেল সেলামি", "ইঁচড়ে পাকা", "কুঁড়ের বাদশা"], "bank": ["আক্কেল সেলামি", "কলুর বলদ", "ইঁচড়ে পাকা", "কড়ায় গণ্ডায়", "কুঁড়ের বাদশা"], "ans": ["কলুর বলদ", "কড়ায় গণ্ডায়", "আক্কেল সেলামি", "ইঁচড়ে পাকা", "কুঁড়ের বাদশা"]}, {"label": "ঘ", "text": "আমাদের শ্রেণিতে কয়েকজন শিক্ষার্থী খুব ভালোভাবে পড়াশোনা করে। কিন্তু একজন শিক্ষার্থী সব সময় অন্যের কথায় চলে এবং নিজের কোনো মতামত প্রকাশ করে না। তাকে {1} মনে হয়। আরেকজন শিক্ষার্থী কোনো কাজ না বুঝেই ভুল উত্তর দেয়। বন্ধুরা তাকে গল্পের {2} চরিত্রের সঙ্গে তুলনা করে। একদিন বিদ্যালয়ের পুরোনো কম্পিউটারটি হঠাৎ নষ্ট হয়ে গেল। এতে শিক্ষার্থীরা কিছুটা সমস্যায় পড়ল। নতুন কম্পিউটার পাওয়ার খবর শুনে সবাই খুব খুশি হলো। তাদের কাছে সেটি যেন {3} পাওয়ার মতো আনন্দের ছিল। পুরোনো কম্পিউটারটির সঙ্গে নতুন কম্পিউটারের কাজের ক্ষমতার {4} পার্থক্য ছিল। এক গল্পে অন্যায়কারী চরিত্রটি তার কাজের জন্য {5} খেল।", "forms": ["কাঠের পুতুল", "অকাল কুষ্মাণ্ড", "ঈদের চাঁদ", "আকাশ পাতাল", "উত্তম মধ্যম"], "bank": ["আকাশ পাতাল", "কাঠের পুতুল", "অক্কা পাওয়া", "ঈদের চাঁদ", "অকাল কুষ্মাণ্ড", "উত্তম মধ্যম"], "ans": ["কাঠের পুতুল", "অকাল কুষ্মাণ্ড", "ঈদের চাঁদ", "আকাশ পাতাল", "উত্তম মধ্যম"]}];
+const bn = n => String(n).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+const $ = s => document.querySelector(s);
+const PLAY='<svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>', PAUSE='<svg viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
+
+/* ---------- audio ---------- */
+const aud=$('#aud'), seeks=[$('#seek'),$('#seek2')], plays=[$('#play'),$('#play2')];
+const fmt=s=>{s=Math.max(0,Math.floor(s||0));return bn(Math.floor(s/60)+':'+String(s%60).padStart(2,'0'))};
+const setPlay=()=>plays.forEach(b=>b.innerHTML=aud.paused?PLAY:PAUSE); setPlay();
+plays.forEach(b=>b.onclick=()=>aud.paused?aud.play():aud.pause());
+aud.onplay=aud.onpause=aud.onended=setPlay;
+aud.ontimeupdate=()=>{
+  if(dragging)return;
+  const p=aud.duration?aud.currentTime/aud.duration*1000:0;
+  seeks.forEach(s=>{s.value=p;s.style.setProperty('--p',p/10+'%')});
+  $('#cur').textContent=fmt(aud.currentTime);
+  $('#t2').textContent=fmt(aud.currentTime)+' / '+fmt(aud.duration);
+};
+aud.onloadedmetadata=()=>{$('#dur').textContent=fmt(aud.duration);aud.ontimeupdate()};
+let dragging=false;
+seeks.forEach(s=>{
+  ['pointerdown','touchstart','keydown'].forEach(ev=>s.addEventListener(ev,()=>dragging=true,{passive:true}));
+  ['pointerup','touchend','change','keyup','blur'].forEach(ev=>s.addEventListener(ev,()=>dragging=false));
+  s.oninput=()=>{
+    const d=aud.duration;if(!d||!isFinite(d))return;
+    const t=s.value/1000*d;aud.currentTime=t;
+    seeks.forEach(x=>{x.value=s.value;x.style.setProperty('--p',s.value/10+'%')});
+    $('#cur').textContent=fmt(t);
+  };
+});
+$('#back').onclick=()=>aud.currentTime=Math.max(0,aud.currentTime-10);
+$('#fwd').onclick=()=>aud.currentTime=Math.min(aud.duration||1e9,aud.currentTime+10);
+document.querySelectorAll('.sp').forEach(b=>b.onclick=()=>{
+  aud.playbackRate=+b.dataset.r;document.querySelectorAll('.sp').forEach(x=>x.classList.toggle('on',x===b))});
+/* Seeking fix: fetch the whole (small) file and play it from memory,
+   so jumping to any minute works even if the server ignores Range requests. */
+(async()=>{
+  try{
+    const r=await fetch('bagdhara-lecture.m4a');
+    if(!r.ok)throw 0;
+    const blob=new Blob([await r.arrayBuffer()],{type:'audio/mp4'});
+    const t=aud.currentTime,wasPlaying=!aud.paused;
+    aud.src=URL.createObjectURL(blob);
+    aud.addEventListener('loadedmetadata',()=>{
+      if(t)aud.currentTime=t;if(wasPlaying)aud.play().catch(()=>{});
+    },{once:true});
+  }catch(e){/* keep the normal src as a fallback */}
+})();
+/* the dock only shows once the big player has scrolled away */
+new IntersectionObserver(([e])=>{$('#dock').style.display='flex'},{}).observe(document.body);
+
+/* ---------- exercises ---------- */
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const state=DATA.map(s=>({fill:Array(5).fill(null),status:Array(5).fill(''),selChip:null,selBlank:null,bank:shuffle(s.bank)}));
+
+function renderAll(){
+  $('#exs').innerHTML='';
+  DATA.forEach((s,i)=>{
+    const el=document.createElement('article');el.className='ex';el.id='ex'+i;
+    $('#exs').appendChild(el);draw(i);
+    io.observe(el);
+  });
+  updateTotal();
+}
+function draw(i){
+  const s=DATA[i],st=state[i],el=$('#ex'+i);
+  const html=s.text.replace(/\{(\d)\}/g,(_,n)=>{
+    const k=n-1,f=st.fill[k],cls=['blank',f!=null?'filled':'',st.status[k],st.selBlank===k?'target':''].join(' ');
+    let label=f!=null?st.bank[f]:'';
+    if(st.status[k]==='ok'||st.status[k]==='shown')label=s.forms[k];
+    return `<button class="${cls}" data-k="${k}" aria-label="শূন্যস্থান ${bn(n)}"><sup>${bn(n)}</sup>${label||'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}</button><span class="read-ans">${s.forms[k]}</span>`;
+  });
+  const used=new Set(st.fill);
+  const ok=st.status.filter(x=>x==='ok').length;
+  el.innerHTML=`
+   <div class="exhead"><div class="letter">${s.label}</div><div><b>অনুচ্ছেদ ${s.label})</b><div class="meta">${bn(5)}টি শূন্যস্থান</div></div>
+    <span class="score">${bn(ok)}/${bn(5)}</span></div>
+   <div class="bank">${st.bank.map((b,j)=>`<button class="chip ${used.has(j)?'used':''} ${st.selChip===j?'sel':''}" data-j="${j}">${b}</button>`).join('')}</div>
+   <p class="txt">${html}</p>
+   <div class="actions">
+     <button class="btn" data-a="check">মিলিয়ে দেখো</button>
+     <button class="btn ghost" data-a="show">উত্তর দেখাও</button>
+     <button class="btn ghost" data-a="reset">আবার করো</button>
+     <span class="msg ${ok===5?'good':''}">${ok===5?'🎉 সবগুলো ঠিক হয়েছে!':''}</span>
+   </div>`;
+  el.classList.add('in');
+}
+$('#exs').addEventListener('click',e=>{
+  const art=e.target.closest('.ex');if(!art)return;
+  const i=+art.id.slice(2),st=state[i],s=DATA[i];
+  const chip=e.target.closest('.chip'),bl=e.target.closest('.blank'),act=e.target.closest('[data-a]');
+  if(chip){
+    const j=+chip.dataset.j; if(st.fill.includes(j))return;
+    if(st.selBlank!=null){place(i,st.selBlank,j)}
+    else st.selChip=st.selChip===j?null:j;
+  }else if(bl){
+    const k=+bl.dataset.k;
+    if(st.status[k]==='ok'||st.status[k]==='shown')return;
+    if(st.fill[k]!=null){st.fill[k]=null;st.status[k]=''}
+    else if(st.selChip!=null){place(i,k,st.selChip);return draw(i),updateTotal()}
+    else st.selBlank=st.selBlank===k?null:k;
+  }else if(act){
+    const a=act.dataset.a;
+    if(a==='check')st.fill.forEach((j,k)=>{if(j==null){st.status[k]=''}else if(st.status[k]!=='shown')st.status[k]=st.bank[j]===s.ans[k]?'ok':'bad'});
+    if(a==='show')s.ans.forEach((x,k)=>{st.fill[k]=st.bank.indexOf(x);st.status[k]='shown'});
+    if(a==='reset'){st.fill.fill(null);st.status.fill('');st.selChip=st.selBlank=null;st.bank=shuffle(s.bank)}
+  }
+  draw(i);updateTotal();
+});
+function place(i,k,j){const st=state[i];st.fill[k]=j;st.status[k]='';st.selChip=st.selBlank=null}
+function updateTotal(){
+  const ok=state.reduce((a,s)=>a+s.status.filter(x=>x==='ok').length,0);
+  $('#total').textContent=bn(ok)+'/'+bn(DATA.length*5);
+}
+
+/* mode toggle */
+const setMode=r=>{document.body.classList.toggle('read',r);$('#mRead').classList.toggle('on',r);$('#mPractice').classList.toggle('on',!r)};
+$('#mRead').onclick=()=>setMode(true);$('#mPractice').onclick=()=>setMode(false);
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
+renderAll();
+</script>
+</body>
+</html>
