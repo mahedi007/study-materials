@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>স্টাডি ম্যাটেরিয়ালস — Munjiba</title>
+<meta name="description" content="অডিও, অনুশীলন ও পড়ার উপকরণ — সব এক জায়গায়।">
+<meta name="theme-color" content="#f4eee1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4eee1; --card:#fbf8f0; --ink:#1d2a26; --muted:#5d6a64;
+  --green:#14342c; --green2:#1f4a3f; --gold:#e9a928; --gold-soft:#f6dfa3; --line:#d9d0bd;
+  --serif:'Noto Serif Bengali','Kalpurush',Georgia,serif;
+  --sans:'Hind Siliguri','Noto Sans Bengali','Kalpurush',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.75;font-size:18px;min-height:100vh;
+  background-image:radial-gradient(rgba(20,52,44,.07) 1px,transparent 1.2px);background-size:22px 22px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0;font-size:15px}
+.brand{font-weight:700;font-family:var(--serif);font-size:20px;color:var(--green);display:flex;align-items:center;gap:8px}
+.brand i{width:12px;height:12px;border-radius:50%;background:var(--gold);display:inline-block}
+.top span{color:var(--muted)}
+
+.hero{padding:30px 0 6px;position:relative}
+.kicker{display:inline-block;font-size:14px;font-weight:600;letter-spacing:.04em;color:var(--green2);border:1.5px solid var(--green2);border-radius:99px;padding:2px 14px}
+h1{font-family:var(--serif);font-weight:800;font-size:clamp(40px,9vw,76px);line-height:1.25;margin:16px 0 6px;color:var(--green)}
+h1 span{position:relative;white-space:nowrap}
+h1 span svg{position:absolute;left:0;bottom:-10px;width:100%;height:16px;overflow:visible}
+.lead{max-width:32em;color:var(--muted);font-size:19px;margin-top:18px}
+
+.tools{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:34px 0 8px}
+.search{flex:1 1 260px;display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--ink);border-radius:99px;padding:6px 18px;box-shadow:3px 3px 0 var(--ink)}
+.search input{flex:1;border:0;outline:0;background:transparent;font:500 17px var(--sans);color:var(--ink);min-width:0}
+.search svg{width:20px;height:20px;stroke:var(--green);fill:none;stroke-width:2.2;flex:none}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font:600 15px var(--sans);padding:4px 16px;border-radius:99px;border:1.5px solid var(--green);background:transparent;color:var(--green);cursor:pointer;transition:background .15s}
+.chip:hover{background:rgba(20,52,44,.08)}
+.chip.on{background:var(--green);color:#f4eee1}
+.count{font-size:15px;color:var(--muted);margin:14px 2px 0}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:26px;margin:18px 0 60px}
+.card{display:flex;flex-direction:column;background:var(--card);border:1.5px solid var(--ink);border-radius:20px;overflow:hidden;
+  box-shadow:6px 6px 0 var(--ink);transition:transform .2s,box-shadow .2s;opacity:0;transform:translateY(14px);animation:up .55s forwards}
+.card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.card:active{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--ink)}
+@keyframes up{to{opacity:1;transform:none}}
+.cover{height:130px;position:relative;display:grid;place-items:center;font-size:52px;overflow:hidden}
+.cover::before,.cover::after{content:"";position:absolute;border-radius:50%;border:26px solid rgba(255,255,255,.14)}
+.cover::before{width:170px;height:170px;right:-50px;top:-70px}
+.cover::after{width:110px;height:110px;left:-40px;bottom:-60px}
+.cover b{position:relative;filter:drop-shadow(0 3px 0 rgba(0,0,0,.18));transform:rotate(-6deg);transition:transform .25s}
+.card:hover .cover b{transform:rotate(4deg) scale(1.1)}
+.new{position:absolute;top:12px;right:12px;background:var(--gold);color:var(--green);font:700 13px var(--sans);padding:1px 12px;border-radius:99px;border:1.5px solid var(--ink)}
+.body{padding:16px 20px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.subj{font-size:13px;font-weight:700;letter-spacing:.05em;color:var(--green2)}
+.card h3{font-family:var(--serif);font-size:23px;line-height:1.45;color:var(--green)}
+.desc{font-size:16px;color:var(--muted);line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.tags span{font-size:13px;font-weight:600;background:var(--paper);border:1.5px solid var(--line);border-radius:99px;padding:0 10px}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:12px;font-size:14px;color:var(--muted)}
+.go{font-weight:700;color:var(--green);display:inline-flex;gap:6px;align-items:center}
+.go::after{content:"→";transition:transform .2s}
+.card:hover .go::after{transform:translateX(5px)}
+
+.state{text-align:center;padding:60px 10px;color:var(--muted);font-size:18px;grid-column:1/-1}
+footer{text-align:center;color:var(--muted);font-size:14px;padding:10px 0 40px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.card{opacity:1;transform:none}}
+@media(max-width:640px){body{font-size:17px}.card{box-shadow:4px 4px 0 var(--ink)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="brand" href="/"><i></i>Munjiba</a><span>স্টাডি ম্যাটেরিয়ালস</span></div>
+
+  <header class="hero">
+    <span class="kicker">অডিও · অনুশীলন · নোট</span>
+    <h1>পড়ার <span>উপকরণ
+      <svg viewBox="0 0 300 16" preserveAspectRatio="none"><path d="M2 10 C 30 0, 50 16, 80 8 S 130 2, 160 9 S 220 15, 298 5" fill="none" stroke="#e9a928" stroke-width="5" stroke-linecap="round"/></svg>
+    </span><br>এক জায়গায়</h1>
+    <p class="lead">যে ম্যাটেরিয়ালটা দরকার, বেছে নাও আর শুরু করো। নতুন নতুন অনুশীলন ও লেকচার নিয়মিত যোগ হচ্ছে।</p>
+  </header>
+
+  <div class="tools">
+    <label class="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5" stroke-linecap="round"/></svg>
+      <input id="q" type="search" placeholder="খুঁজে দেখো…" autocomplete="off" aria-label="ম্যাটেরিয়াল খোঁজো">
+    </label>
+    <div class="chips" id="chips"></div>
+  </div>
+  <p class="count" id="count" aria-live="polite"></p>
+
+  <main class="grid" id="grid"><div class="state">লোড হচ্ছে…</div></main>
+  <footer>© Munjiba</footer>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const COVERS=[
+  ['#14342c','#e9a928'],['#c8553d','#f6dfa3'],['#2f7f79','#f4eee1'],['#e9a928','#14342c'],['#5b3f8c','#f6dfa3'],['#3b5d8f','#f4eee1']
+];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let items=[],subject='সব';
+
+function fmtDate(d){
+  if(!d)return'';
+  const t=new Date(d+'T00:00:00');if(isNaN(t))return esc(d);
+  return t.toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'});
+}
+function isNew(d){
+  if(!d)return false;const t=new Date(d+'T00:00:00');
+  return !isNaN(t)&&(Date.now()-t)/864e5<=14;
+}
+function chips(){
+  const subs=['সব',...new Set(items.map(i=>i.subject))];
+  $('#chips').innerHTML=subs.map(s=>`<button class="chip ${s===subject?'on':''}" data-s="${esc(s)}">${esc(s)}</button>`).join('');
+}
+function render(){
+  const q=$('#q').value.trim().toLowerCase();
+  const list=items.filter(i=>(subject==='সব'||i.subject===subject)&&
+    (!q||[i.title,i.description,i.subject,...i.tags].join(' ').toLowerCase().includes(q)));
+  $('#count').textContent=list.length?`${bn(list.length)}টি ম্যাটেরিয়াল`:'';
+  if(!list.length){$('#grid').innerHTML='<div class="state">কিছু পাওয়া যায়নি। অন্য কিছু লিখে খুঁজে দেখো।</div>';return}
+  $('#grid').innerHTML=list.map((i,n)=>{
+    const [bg,fg]=COVERS[items.indexOf(i)%COVERS.length];
+    return `<a class="card" href="${i.url}" style="animation-delay:${Math.min(n,8)*70}ms">
+      <div class="cover" style="background:${bg};color:${fg}"><b>${esc(i.icon)}</b>${isNew(i.date)?'<span class="new">নতুন</span>':''}</div>
+      <div class="body">
+        <div class="subj">${esc(i.subject)}</div>
+        <h3>${esc(i.title)}</h3>
+        <p class="desc">${esc(i.description)}</p>
+        ${i.tags.length?`<div class="tags">${i.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`:''}
+        <div class="foot"><span>${fmtDate(i.date)}</span><span class="go">খুলো</span></div>
+      </div></a>`;
+  }).join('');
+}
+$('#chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;subject=b.dataset.s;chips();render()});
+$('#q').addEventListener('input',render);
+
+fetch('/catalog.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{
+  items=d.items||[];
+  if(!items.length){$('#grid').innerHTML='<div class="state">এখনও কোনো ম্যাটেরিয়াল যোগ হয়নি।</div>';return}
+  chips();render();
+}).catch(()=>{$('#grid').innerHTML='<div class="state">ম্যাটেরিয়াল লোড করা যায়নি। একটু পরে আবার চেষ্টা করো।</div>'});
+</script>
+</body>
+</html>
